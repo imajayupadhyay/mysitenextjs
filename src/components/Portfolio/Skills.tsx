@@ -37,7 +37,7 @@ const categories = [
       { name: "JavaScript", icon: `${DI}/javascript/javascript-original.svg` },
       { name: "PHP", icon: `${DI}/php/php-original.svg` },
       { name: "Bash", icon: `${SI}/gnubash/4EAA25` },
-      { name: "Shell", icon: `${SI}/windowsterminal/4CC2FF` },
+      { name: "Shell", icon: `${DI}/bash/bash-plain.svg` },
     ],
   },
   {
