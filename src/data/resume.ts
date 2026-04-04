@@ -5,8 +5,8 @@ export const personalInfo = {
   email: "ajayupadhyaydevops@gmail.com",
   phone: "+91 97179 69678",
   location: "New Delhi, India",
-  github: "https://github.com/ajayupadhyay",
-  linkedin: "https://linkedin.com/in/ajayupadhyay",
+  github: "https://github.com/imajayupadhyay",
+  linkedin: "https://www.linkedin.com/in/ajay-upadhyay-devops/",
 };
 
 export const stats = [
@@ -108,31 +108,39 @@ export const skillCategories = [
 export const certifications = [
   {
     provider: "AWS",
-    name: "Solutions Architect",
+    name: "AWS Certified Solutions Architect",
     level: "Associate",
     code: "SAA-C03",
     color: "#ff9900",
+    badge: "https://images.credly.com/size/340x340/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png",
+    verifyUrl: "https://www.credly.com/badges/d728239f-9455-40ad-8995-4085a2b12ac7/public_url",
   },
   {
     provider: "AWS",
-    name: "Developer",
+    name: "AWS Certified Developer",
     level: "Associate",
     code: "DVA-C02",
     color: "#ff9900",
+    badge: "https://images.credly.com/size/340x340/images/b9feab85-1a43-4f6c-99a5-631b88d5461b/image.png",
+    verifyUrl: "https://www.credly.com/badges/1a1c6387-8fc8-4879-b2f4-96c4bb00a548/public_url",
   },
   {
     provider: "Azure",
-    name: "Administrator",
+    name: "Microsoft Certified: Azure Administrator",
     level: "Associate",
     code: "AZ-104",
     color: "#0078d4",
+    badge: "https://images.credly.com/size/340x340/images/336eebfc-0ac3-4553-9a67-b402f491f185/azure-administrator-associate-600x600.png",
+    verifyUrl: "https://learn.microsoft.com/en-us/users/AjayUpadhyay-007/credentials/37149BE839FE215A",
   },
   {
     provider: "Azure",
-    name: "Fundamentals",
+    name: "Microsoft Certified: Azure Fundamentals",
     level: "",
     code: "AZ-900",
     color: "#0078d4",
+    badge: "https://images.credly.com/size/340x340/images/be8fcaeb-c769-4858-b567-ffaaa73ce8cf/image.png",
+    verifyUrl: "https://learn.microsoft.com/en-us/users/ajayupadhyay-007/credentials/74d000841b2147a6",
   },
 ];
 
