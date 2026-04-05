@@ -47,6 +47,24 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, id: result.insertId }, { status: 201 });
   } catch (err) {
     console.error("[contact] failed to save message:", err);
+
+    // When DEBUG_API=1, return the real error so we can diagnose
+    // without needing shell/log access on the host. Turn off in prod
+    // once the form is verified working.
+    if (process.env.DEBUG_API === "1") {
+      const e = err as { code?: string; errno?: number; sqlMessage?: string; message?: string };
+      return NextResponse.json(
+        {
+          error: "Server error (debug)",
+          code: e?.code ?? null,
+          errno: e?.errno ?? null,
+          sqlMessage: e?.sqlMessage ?? null,
+          message: e?.message ?? String(err),
+        },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json(
       { error: "Something went wrong. Please try again later." },
       { status: 500 }
