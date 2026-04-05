@@ -3,129 +3,102 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { personalInfo } from "@/data/resume";
+import BackgroundLayer from "@/components/Portfolio/BackgroundLayer";
+
+const quickStats = [
+  { value: "3+", label: "Years" },
+  { value: "110+", label: "Projects" },
+  { value: "99.9%", label: "Uptime" },
+  { value: "4", label: "Certs" },
+];
 
 export default function Home() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-neon-blue/[0.03] rounded-full blur-[150px]" />
-        <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-neon-green/[0.02] rounded-full blur-[120px]" />
-      </div>
-
-      <div
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          backgroundImage:
-            "linear-gradient(#00d4ff 1px, transparent 1px), linear-gradient(90deg, #00d4ff 1px, transparent 1px)",
-          backgroundSize: "80px 80px",
-        }}
-      />
-
-      <div className="relative text-center px-6 max-w-3xl mx-auto">
-        {/* Status badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex justify-center mb-10"
-        >
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-mono text-zinc-400">
-            <span className="w-2 h-2 rounded-full bg-neon-green animate-pulse-green" />
-            Available for opportunities
-          </div>
-        </motion.div>
-
-        {/* Greeting */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="text-sm font-mono text-neon-green tracking-widest mb-6"
-        >
-          {"// HELLO, I'M"}
-        </motion.p>
-
-        {/* Name */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.7 }}
-          className="text-5xl md:text-8xl font-bold font-mono tracking-tight mb-6"
-        >
-          <span className="bg-gradient-to-r from-white via-zinc-200 to-zinc-500 bg-clip-text text-transparent">
-            {personalInfo.name}
-          </span>
-        </motion.h1>
-
-        {/* Title */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="text-xl md:text-2xl font-mono text-zinc-500 mb-4"
-        >
-          {personalInfo.title}
-        </motion.p>
-
-        {/* One-liner */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="text-base text-zinc-600 max-w-xl mx-auto mb-12 leading-relaxed"
-        >
-          I architect and manage cloud infrastructure across AWS &amp; Azure,
-          build CI/CD pipelines, and keep production systems running at
-          <span className="text-neon-green font-mono"> 99.9% uptime</span>.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <Link
-            href="/portfolio"
-            className="group relative px-8 py-3 rounded-lg font-mono text-sm font-medium bg-neon-blue/10 border border-neon-blue/30 text-neon-blue hover:bg-neon-blue/20 transition-all"
+    <>
+      <BackgroundLayer />
+      <section className="relative z-[1] min-h-screen flex items-center">
+        <div className="max-w-[1240px] mx-auto px-7 py-24 w-full">
+          {/* Status pill */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-border bg-surface font-mono text-[11px] text-text-2 mb-9"
           >
-            View Portfolio
-            <span className="ml-2 inline-block group-hover:translate-x-1 transition-transform">
-              &rarr;
+            <span className="w-1.5 h-1.5 rounded-full bg-lime shadow-[0_0_10px_#c8ff4d]" />
+            <span>Available for new roles</span>
+            <span className="text-text-3">·</span>
+            <span>New Delhi · IST</span>
+          </motion.div>
+
+          {/* Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.08, duration: 0.65, ease: [0.22, 0.9, 0.3, 1] }}
+            className="font-display font-bold tracking-[-0.035em] leading-[0.88] text-[clamp(56px,10vw,156px)] max-w-[14ch] mb-7"
+          >
+            Ship infra
+            <br />
+            that stays{" "}
+            <span className="italic font-medium bg-gradient-to-r from-amber to-coral bg-clip-text text-transparent">
+              up.
             </span>
-          </Link>
-          <a
-            href={`mailto:${personalInfo.email}`}
-            className="px-8 py-3 rounded-lg font-mono text-sm font-medium border border-dark-border text-zinc-400 hover:text-white hover:border-zinc-600 transition-all"
-          >
-            Get In Touch
-          </a>
-        </motion.div>
+          </motion.h1>
 
-        {/* Quick stats */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9 }}
-          className="flex items-center justify-center gap-8 mt-16 text-center"
-        >
-          {[
-            { value: "3+", label: "Years" },
-            { value: "110+", label: "Projects" },
-            { value: "4", label: "Certifications" },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <div className="text-2xl font-bold font-mono text-neon-green">
-                {stat.value}
+          {/* Subcopy */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18, duration: 0.5 }}
+            className="text-text-2 text-[17px] leading-[1.55] max-w-[56ch] mb-10 font-sans"
+          >
+            I&rsquo;m <span className="text-text font-medium">{personalInfo.name}</span> — a DevOps &amp;
+            Cloud Engineer architecting multi-cloud infrastructure, CI/CD pipelines, and observability
+            across AWS &amp; Azure. Three years in, four certifications deep.
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.28, duration: 0.5 }}
+            className="flex flex-wrap items-center gap-3 mb-16"
+          >
+            <Link
+              href="/portfolio"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-amber text-[#1a0f08] font-mono text-[12px] font-semibold uppercase tracking-[0.1em] transition-all hover:bg-amber-soft hover:translate-x-0.5"
+            >
+              View portfolio <span>→</span>
+            </Link>
+            <a
+              href={`mailto:${personalInfo.email}`}
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-border bg-surface font-mono text-[12px] text-text-2 transition-colors hover:text-text hover:border-border-hi hover:bg-surface-hi"
+            >
+              Get in touch ↗
+            </a>
+          </motion.div>
+
+          {/* Quick stats strip */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.45, duration: 0.6 }}
+            className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 max-w-3xl border-t border-border pt-7"
+          >
+            {quickStats.map((s) => (
+              <div key={s.label}>
+                <div className="font-display font-bold text-[44px] leading-none tracking-[-0.02em] text-text">
+                  {s.value}
+                </div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-text-3 mt-2.5">
+                  {s.label}
+                </div>
               </div>
-              <div className="text-[10px] font-mono text-zinc-600 uppercase tracking-wider">
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+    </>
   );
 }

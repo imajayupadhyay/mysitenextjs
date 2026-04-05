@@ -1,132 +1,109 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Portfolio", href: "/portfolio" },
-];
-
 const portfolioLinks = [
-  { label: "Experience", href: "#experience" },
-  { label: "Skills", href: "#skills" },
-  { label: "Certifications", href: "#certifications" },
+  { label: "Work", href: "#work" },
+  { label: "Stack", href: "#stack" },
+  { label: "Certs", href: "#certs" },
   { label: "Contact", href: "#contact" },
 ];
 
+const homeLinks = [{ label: "Portfolio", href: "/portfolio" }];
+
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const isPortfolio = pathname === "/portfolio";
-
-  const links = isPortfolio
-    ? [{ label: "Home", href: "/" }, ...portfolioLinks]
-    : navLinks;
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const links = isPortfolio ? portfolioLinks : homeLinks;
 
   return (
     <motion.nav
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-dark-border"
-          : "bg-transparent"
-      }`}
+      initial={{ y: -24, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: [0.22, 0.9, 0.3, 1] }}
+      className="sticky top-4 z-50 mt-4 mx-auto max-w-[1180px] px-3"
     >
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="font-mono text-lg font-bold text-neon-blue">
-          {"<"}AU{" />"}
+      <div className="flex items-center justify-between gap-5 pl-[18px] pr-3.5 py-2.5 border border-border rounded-full bg-[rgba(17,17,24,0.72)] backdrop-blur-[16px] backdrop-saturate-[140%]">
+        {/* Brand */}
+        <Link href="/" className="flex items-center gap-2.5 font-display font-bold text-[15px] tracking-[-0.01em] text-text">
+          <span className="w-2 h-2 rounded-full bg-amber animate-pulse-amber" />
+          <span>Ajay Upadhyay</span>
         </Link>
 
-        {/* Desktop */}
-        <div className="hidden md:flex items-center gap-8">
-          {links.map((link) =>
-            link.href.startsWith("#") ? (
+        {/* Desktop links */}
+        <div className="hidden md:flex items-center gap-1 font-mono text-[12px]">
+          {links.map((l) =>
+            l.href.startsWith("#") ? (
               <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-mono text-zinc-400 hover:text-neon-green transition-colors"
+                key={l.href}
+                href={l.href}
+                className="px-3 py-1.5 rounded-full text-text-2 transition-colors hover:text-text hover:bg-surface"
               >
-                {link.label}
+                {l.label}
               </a>
             ) : (
               <Link
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-mono transition-colors ${
-                  pathname === link.href
-                    ? "text-neon-green"
-                    : "text-zinc-400 hover:text-neon-green"
-                }`}
+                key={l.href}
+                href={l.href}
+                className="px-3 py-1.5 rounded-full text-text-2 transition-colors hover:text-text hover:bg-surface"
               >
-                {link.label}
+                {l.label}
               </Link>
-            )
+            ),
           )}
         </div>
 
+        {/* CTA */}
+        <Link
+          href={isPortfolio ? "#contact" : "/portfolio"}
+          className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-amber text-[#1a0f08] font-mono text-[12px] font-semibold transition-all hover:bg-amber-soft hover:translate-x-0.5"
+        >
+          {isPortfolio ? "Get in touch" : "View work"} <span>↗</span>
+        </Link>
+
         {/* Mobile toggle */}
         <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          onClick={() => setOpen((o) => !o)}
+          className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-[5px]"
           aria-label="Toggle menu"
         >
-          <span
-            className={`w-5 h-0.5 bg-zinc-400 transition-transform ${
-              mobileOpen ? "rotate-45 translate-y-2" : ""
-            }`}
-          />
-          <span
-            className={`w-5 h-0.5 bg-zinc-400 transition-opacity ${
-              mobileOpen ? "opacity-0" : ""
-            }`}
-          />
-          <span
-            className={`w-5 h-0.5 bg-zinc-400 transition-transform ${
-              mobileOpen ? "-rotate-45 -translate-y-2" : ""
-            }`}
-          />
+          <span className={`w-4 h-px bg-text-2 transition-transform ${open ? "rotate-45 translate-y-[3px]" : ""}`} />
+          <span className={`w-4 h-px bg-text-2 transition-opacity ${open ? "opacity-0" : ""}`} />
+          <span className={`w-4 h-px bg-text-2 transition-transform ${open ? "-rotate-45 -translate-y-[3px]" : ""}`} />
         </button>
       </div>
 
       {/* Mobile menu */}
-      {mobileOpen && (
+      {open && (
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-dark-border px-6 pb-6"
+          className="md:hidden mt-2 rounded-2xl border border-border bg-[rgba(17,17,24,0.94)] backdrop-blur-[16px] p-3"
         >
-          {links.map((link) =>
-            link.href.startsWith("#") ? (
+          {links.map((l) =>
+            l.href.startsWith("#") ? (
               <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="block py-3 text-sm font-mono text-zinc-400 hover:text-neon-green transition-colors"
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="block px-3 py-2.5 font-mono text-[13px] text-text-2 rounded-lg transition-colors hover:text-text hover:bg-surface"
               >
-                {link.label}
+                {l.label}
               </a>
             ) : (
               <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="block py-3 text-sm font-mono text-zinc-400 hover:text-neon-green transition-colors"
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="block px-3 py-2.5 font-mono text-[13px] text-text-2 rounded-lg transition-colors hover:text-text hover:bg-surface"
               >
-                {link.label}
+                {l.label}
               </Link>
-            )
+            ),
           )}
         </motion.div>
       )}

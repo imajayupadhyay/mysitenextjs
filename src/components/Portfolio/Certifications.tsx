@@ -1,103 +1,64 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { certifications } from "@/data/resume";
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="py-24 relative">
-      <div className="max-w-5xl mx-auto px-6">
-        {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <p className="text-sm font-mono text-neon-green mb-2 tracking-widest">
-            {"// VERIFIED CREDENTIALS"}
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold font-mono">
-            Certifications
+    <section id="certs" className="py-[60px]">
+      <div className="flex justify-between items-end gap-6 mb-9 pb-[18px] border-b border-border">
+        <div>
+          <div className="font-mono text-[11px] font-semibold tracking-[0.16em] uppercase text-amber mb-2.5">
+            § Credentials
+          </div>
+          <h2 className="font-display font-semibold text-[clamp(36px,5vw,64px)] leading-[0.95] tracking-[-0.025em] max-w-[20ch]">
+            Paper <span className="italic text-text-2 font-normal">trail.</span>
           </h2>
-        </motion.div>
+        </div>
+        <div className="font-mono text-[11px] text-text-3 uppercase tracking-[0.1em] whitespace-nowrap">
+          4 Active · AWS + Azure
+        </div>
+      </div>
 
-        {/* Two-row grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {certifications.map((cert, i) => (
-            <motion.a
-              key={cert.code}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+        {certifications.map((cert, i) => (
+          <motion.div
+            key={cert.code}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ delay: i * 0.07, duration: 0.5, ease: [0.22, 0.9, 0.3, 1] }}
+            whileHover={{ y: -4 }}
+            className="group bg-surface border border-border rounded-[20px] px-5 pt-[22px] pb-5 text-center transition-all hover:border-amber hover:bg-surface-hi"
+          >
+            <div className="w-24 h-24 mx-auto mb-4 drop-shadow-[0_10px_20px_rgba(0,0,0,0.4)] relative">
+              <Image
+                src={cert.badge}
+                alt={cert.name}
+                width={96}
+                height={96}
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <h5 className="font-display font-semibold text-[15px] leading-[1.25] tracking-[-0.005em] mb-2.5">
+              {cert.name}
+            </h5>
+            <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.1em] pb-3.5 mb-3.5 border-b border-dashed border-border">
+              {cert.level && <span className="text-amber font-semibold">{cert.level}</span>}
+              {cert.level && <span> · </span>}
+              <span>{cert.code}</span>
+            </div>
+            <a
               href={cert.verifyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ y: -4 }}
-              className="group relative glass rounded-xl p-5 flex items-center gap-5 hover:border-zinc-700 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 font-mono text-[11px] text-text-2 px-3 py-1.5 border border-border rounded-full transition-all hover:text-amber hover:border-amber"
             >
-              {/* Hover glow */}
-              <div
-                className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{
-                  boxShadow: `0 0 40px ${cert.color}15, inset 0 0 40px ${cert.color}08`,
-                }}
-              />
-
-              {/* Badge image */}
-              <div className="relative shrink-0">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={cert.badge}
-                  alt={cert.name}
-                  className="w-20 h-20 md:w-24 md:h-24 object-contain"
-                  loading="lazy"
-                />
-              </div>
-
-              {/* Details */}
-              <div className="relative flex-1 min-w-0">
-                <h3 className="text-sm md:text-base font-bold text-white mb-1 leading-snug">
-                  {cert.name}
-                </h3>
-
-                {cert.level && (
-                  <p className="text-xs text-zinc-500 mb-2">
-                    {cert.level}
-                  </p>
-                )}
-
-                <div className="flex items-center gap-3 flex-wrap">
-                  <span
-                    className="text-[11px] font-mono px-2.5 py-1 rounded-md border"
-                    style={{
-                      borderColor: cert.color + "44",
-                      color: cert.color,
-                      backgroundColor: cert.color + "0a",
-                    }}
-                  >
-                    {cert.code}
-                  </span>
-
-                  <span className="flex items-center gap-1.5 text-[11px] font-mono text-zinc-500 group-hover:text-neon-blue transition-colors">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-3.5 h-3.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                    </svg>
-                    Verify
-                  </span>
-                </div>
-              </div>
-
-              {/* Arrow */}
-              <div className="relative text-zinc-700 group-hover:text-neon-blue transition-colors shrink-0">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                </svg>
-              </div>
-            </motion.a>
-          ))}
-        </div>
+              Verify <span>↗</span>
+            </a>
+          </motion.div>
+        ))}
       </div>
     </section>
   );

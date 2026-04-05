@@ -1,136 +1,67 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { skillCategories } from "@/data/resume";
 
-const DI = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
-const SI = "https://cdn.simpleicons.org";
-
-const categories = [
-  {
-    name: "Cloud Platforms",
-    color: "#3b82f6",
-    skills: [
-      { name: "AWS", icon: `${DI}/amazonwebservices/amazonwebservices-original-wordmark.svg` },
-      { name: "Azure", icon: `${DI}/azure/azure-original.svg` },
-      { name: "Azure DevOps", icon: `${DI}/azuredevops/azuredevops-original.svg` },
-      { name: "DigitalOcean", icon: `${DI}/digitalocean/digitalocean-original.svg` },
-      { name: "Hostinger", icon: `${SI}/hostinger/673DE6` },
-    ],
-  },
-  {
-    name: "DevOps & Tools",
-    color: "#22c55e",
-    skills: [
-      { name: "Git", icon: `${DI}/git/git-original.svg` },
-      { name: "GitHub", icon: `${SI}/github/ffffff` },
-      { name: "Docker", icon: `${DI}/docker/docker-original.svg` },
-      { name: "Kubernetes", icon: `${DI}/kubernetes/kubernetes-original.svg` },
-      { name: "Terraform", icon: `${DI}/terraform/terraform-original.svg` },
-      { name: "Ansible", icon: `${SI}/ansible/EE0000` },
-    ],
-  },
-  {
-    name: "Programming & Scripting",
-    color: "#eab308",
-    skills: [
-      { name: "Python", icon: `${DI}/python/python-original.svg` },
-      { name: "JavaScript", icon: `${DI}/javascript/javascript-original.svg` },
-      { name: "PHP", icon: `${DI}/php/php-original.svg` },
-      { name: "Bash", icon: `${SI}/gnubash/4EAA25` },
-      { name: "Shell", icon: `${DI}/bash/bash-plain.svg` },
-    ],
-  },
-  {
-    name: "Web Development",
-    color: "#06b6d4",
-    skills: [
-      { name: "React.js", icon: `${DI}/react/react-original.svg` },
-      { name: "Laravel", icon: `${DI}/laravel/laravel-original.svg` },
-      { name: "WordPress", icon: `${SI}/wordpress/21759B` },
-      { name: "MySQL", icon: `${DI}/mysql/mysql-original.svg` },
-      { name: "NGINX", icon: `${DI}/nginx/nginx-original.svg` },
-    ],
-  },
-  {
-    name: "Monitoring & Logging",
-    color: "#f97316",
-    skills: [
-      { name: "Azure Monitor", icon: `${DI}/azure/azure-original.svg` },
-      { name: "CloudWatch", icon: `${DI}/amazonwebservices/amazonwebservices-original-wordmark.svg` },
-      { name: "Prometheus", icon: `${DI}/prometheus/prometheus-original.svg` },
-      { name: "Grafana", icon: `${DI}/grafana/grafana-original.svg` },
-    ],
-  },
+const stackColors = [
+  "text-amber",
+  "text-sky",
+  "text-lime",
+  "text-coral",
+  "text-amber-soft",
+  "text-violet",
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 relative">
-      <div className="relative max-w-5xl mx-auto px-6">
-        {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <p className="text-sm font-mono text-neon-green mb-2 tracking-widest">
-            {"// INFRASTRUCTURE DASHBOARD"}
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold font-mono">
-            Technical Skills
+    <section id="stack" className="py-[60px]">
+      <div className="flex justify-between items-end gap-6 mb-9 pb-[18px] border-b border-border">
+        <div>
+          <div className="font-mono text-[11px] font-semibold tracking-[0.16em] uppercase text-amber mb-2.5">
+            § Toolbox
+          </div>
+          <h2 className="font-display font-semibold text-[clamp(36px,5vw,64px)] leading-[0.95] tracking-[-0.025em] max-w-[20ch]">
+            The <span className="italic text-text-2 font-normal">stack.</span>
           </h2>
-        </motion.div>
-
-        {/* Skill categories */}
-        <div className="space-y-12">
-          {categories.map((cat, catIdx) => (
-            <motion.div
-              key={cat.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: catIdx * 0.08 }}
-            >
-              {/* Category header */}
-              <div className="flex items-center gap-3 mb-5">
-                <div
-                  className="w-1 h-6 rounded-full"
-                  style={{ backgroundColor: cat.color }}
-                />
-                <h3 className="text-base font-bold text-white">
-                  {cat.name}
-                </h3>
-              </div>
-
-              {/* Skills grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3">
-                {cat.skills.map((skill, skillIdx) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: catIdx * 0.05 + skillIdx * 0.04 }}
-                    whileHover={{ y: -4, borderColor: cat.color + "66" }}
-                    className="flex flex-col items-center gap-3 py-5 px-3 rounded-xl bg-dark-card border border-dark-border cursor-default transition-all hover:shadow-lg hover:shadow-black/20"
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={skill.icon}
-                      alt={skill.name}
-                      loading="lazy"
-                      className="w-10 h-10 object-contain"
-                    />
-                    <span className="text-xs font-mono text-zinc-400 text-center">
-                      {skill.name}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
         </div>
+        <div className="font-mono text-[11px] text-text-3 uppercase tracking-[0.1em] whitespace-nowrap">
+          6 Stacks · 50+ Tools
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+        {skillCategories.map((cat, i) => (
+          <motion.div
+            key={cat.name}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ delay: i * 0.06, duration: 0.5, ease: [0.22, 0.9, 0.3, 1] }}
+            whileHover={{ y: -3 }}
+            className="bg-surface border border-border rounded-[20px] px-6 pt-6 pb-[22px] transition-colors hover:border-border-hi"
+          >
+            <div className="flex items-center justify-between mb-[18px] pb-3 border-b border-border">
+              <h4
+                className={`font-display font-semibold text-[22px] tracking-[-0.01em] ${stackColors[i % stackColors.length]}`}
+              >
+                {cat.name}
+              </h4>
+              <span className="font-mono text-[11px] text-text-3">
+                {String(cat.skills.length).padStart(2, "0")}
+              </span>
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {cat.skills.map((skill) => (
+                <span
+                  key={skill}
+                  className="px-2.5 py-1 bg-bg-2 border border-border rounded-md font-mono text-[11px] text-text-2 transition-all hover:bg-surface-hi hover:text-text hover:border-border-hi"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
